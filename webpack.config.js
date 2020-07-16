@@ -1,26 +1,49 @@
 // webpack config
 const path = require('path');
+const glob = require('glob');
+const fs = require('fs');
 const WebpackBar = require('webpackbar');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const {
+  CleanWebpackPlugin
+} = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const { VueLoaderPlugin } = require('vue-loader');
+const {
+  VueLoaderPlugin
+} = require('vue-loader');
+
+const getEntry = () => {
+  const entry = {};
+  glob.sync('./src/js/**/*.js').forEach((name) => {
+     const start = name.indexOf('/src/js/') + 8; //前面路徑共8個位元的字串，設定的資料夾路徑不同，也要記得更改位元數喔!
+     const end = name.length - 3; //減去附檔名 .js 共三個位元的字串
+     const eArr = [];
+     const n = name.slice(start,end); //取得每個js的名稱
+     eArr.push(name); //push至陣列中
+     entry[n] = eArr; //就會產生多筆入口的陣列囉！
+  });
+  console.log(entry);
+  return entry;
+};
+
 
 module.exports = (env = {}) => ({
   context: path.resolve(__dirname, 'src'),
   mode: env.production ? 'production' : 'development',
+  //entry: getEntry(),
   entry: {
-    app: './app.ts'
+    app: [ './js/app.js' ],
+    app2: [ './js/app2.js' ],
+    app4: [ './js/dir1/app4.js' ],
+    app3: [ './js/dir2/subdir1/app3.js' ]
   },
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "[name].[hash:6].bundle.js",
-    publicPath: process.env.BASE_URL,
+    filename: './[name].js'
   },
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.vue$/,
         use: 'vue-loader'
       },
@@ -32,23 +55,27 @@ module.exports = (env = {}) => ({
       {
         test: /\.ts$/,
         exclude: /node_modules/,
-        use: [
-          {
+        use: [{
             loader: "babel-loader",
-            options: { babelrc: true }
+            options: {
+              babelrc: true
+            }
           },
           {
             loader: "ts-loader",
-            options: { appendTsSuffixTo: [/\.vue$/] }
+            options: {
+              appendTsSuffixTo: [/\.vue$/]
+            }
           }
         ]
       },
       {
         test: /\.css$/,
-        use: [
-          {
+        use: [{
             loader: MiniCssExtractPlugin.loader,
-            options: { hmr: !env.production }
+            options: {
+              hmr: !env.production
+            }
           },
           'css-loader'
         ]
@@ -64,7 +91,7 @@ module.exports = (env = {}) => ({
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: './public/index.html'
+      template: './index.html'
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css'
@@ -72,21 +99,21 @@ module.exports = (env = {}) => ({
     new WebpackBar(),
     new VueLoaderPlugin(),
   ],
-  optimization: {
-    runtimeChunk: 'single',
-    splitChunks: {
-      cacheGroups: {
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-          chunks: 'all'
-        }
-      }
-    }
-  },
+  // optimization: {
+  //   runtimeChunk: 'single',
+  //   splitChunks: {
+  //     cacheGroups: {
+  //       vendor: {
+  //         test: /[\\/]node_modules[\\/]/,
+  //         name: 'vendors',
+  //         chunks: 'all'
+  //       }
+  //     }
+  //   }
+  // },
   devtool: 'source-map',
   devServer: {
-    contentBase: path.join(__dirname, 'src/public'),
+    contentBase: path.join(__dirname, 'src'),
     publicPath: process.env.BASE_URL,
     index: './index.html',
     hot: true,
