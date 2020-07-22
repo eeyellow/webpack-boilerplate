@@ -1,20 +1,365 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <link rel="icon" href="favicon.ico" />
   <title>Template</title>
+  <style>
+    * {
+      overflow: inherit !important;
+    }
+
+    /* ------- */
+    .paper {
+      width: 60%;
+      padding: 1.5rem;
+      margin: 1rem auto;
+      background-color: #f8f8f8;
+      border-radius: .25rem;
+      position: relative;
+    }
+
+    @media (max-width: 1199.98px) {
+      .paper {
+        width: 100%;
+      }
+    }
+
+    .s-word {
+      position: absolute;
+      top: 3.5rem;
+      right: 1.5rem;
+      font-weight: 600;
+    }
+
+    .paper-table {
+      margin: 1rem auto;
+    }
+
+    .paper-title {
+      padding-left: .5rem;
+    }
+
+    th {
+      font-size: 1.25rem;
+      font-weight: 600;
+      text-align: center;
+      padding: 1rem;
+      border-top-left-radius: 0 !important;
+      border-top-right-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+      border-bottom-left-radius: 0 !important;
+    }
+
+    td {
+      padding: 1rem;
+      border-top-left-radius: 0 !important;
+      border-top-right-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+      border-bottom-left-radius: 0 !important;
+    }
+
+    small {
+      display: inline-block;
+    }
+
+    .img {
+      vertical-align: middle;
+      width: 70px;
+    }
+
+    p {
+      padding: .2rem 0;
+    }
+
+    .signer-name {
+      padding: 1rem 0 4rem;
+    }
+
+    .note {
+      padding: 2rem 0;
+    }
+  </style>
 </head>
+
 <body>
-<noscript>
-  <strong
-  >We're sorry but project doesn't work properly without JavaScript
-    enabled. Please enable it to continue.</strong
-  >
-</noscript>
-<div id="app"></div>
-<!-- built files will be auto injected -->
+  <noscript>
+    <strong>We're sorry but project doesn't work properly without JavaScript
+      enabled. Please enable it to continue.</strong>
+  </noscript>
+  <!-- japan -->
+  <!-- 日本-日文 -->
+  <div class="paper jp">
+    <h2 class="note">文書番号：{FileNumber}</h2>
+    <div class="s-word">稿</div>
+    <table class="paper-table" border="1">
+      <thead>
+        <tr>
+          <th colspan="8"><img class="img" src="logo.png" alt=""><span class="paper-title">有機農産物等認証証明書</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td colspan="4">1.文書番号：<span>{FileNumber}</span></td>
+          <td colspan="4">5.発行年月日：<span>{IssueDate}</span></td>
+        </tr>
+        <tr>
+          <td colspan="4">2.輸入国<p>{DestCountry}</p>
+          </td>
+          <td colspan="2">6.輸出国<p>{ExportCountry}</p>
+          </td>
+          <td colspan="2">7.証明書番号<p>{CertificationNumber}</p>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4">3.認証輸入業者の名称及び住所<p>{ImporterName}</p>
+            <p>{ImporterName}</p>
+          </td>
+          <td colspan="4">8. 発行認証機関名及び住所<p>{CompanyName}</p>
+            <p>{CompanyAddress}</p>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4">4.輸出業者の名称及び住所<p>{ExporterName}</p>
+            <p>{ExporterAddress}</p>
+          </td>
+          <td colspan="4">9.認証事業者の名称及び住所<p>{FarmName}</p>
+            <p>{FarmAddress}</p>
+          </td>
+        </tr>
+        <tr>
+          <td style="width: 8%;">項目</td>
+          <td colspan="2" style="width: 20%;">10.製品名</td>
+          <td style="width: 20%;">11.ロット番号</td>
+          <td>12.単位梱包<small>(単位あたりの重量又は容積)</small></td>
+          <td style="width: 10%;">13.数量</td>
+          <td>14.総重量<small>(容積)</small></td>
+          <td>15.その他・備考</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td colspan="2">製品名</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td>2</td>
+          <td colspan="2">製品名</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td colspan="8">根拠法令等：「有機農業促進法」、「有機農產品有機轉型期農產品驗證基準與其生產加工分裝流通及販賣過程可使用之物質」及びその他の関連規則。</td>
+        </tr>
+        <tr>
+          <td colspan="8">備考：<p>{SystemNote}</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="signer-name">
+      16.発行者：{SignerName}
+    </div>
+    <div class="note">
+      <p>聲明：本文件除非經有機農業促進法取得認證之有機農產品驗證機構簽署，否則無效。</p>
+      <p>上開驗證機構可於網站 https://epv.afa.gov.tw 查閱。</p>
+    </div>
+    <div>
+      <p>本驗證文件與續頁分開使用無效 {DCGUID}</p>
+    </div>
+  </div>
+
+  <!-- 日本-英文 -->
+  <div class="paper jp-en">
+    <h2 class="note">File Number：{FileNumber}</h2>
+    <div class="s-word">稿</div>
+    <table class="paper-table" border="1">
+      <thead>
+        <tr>
+          <th colspan="8"><img class="img" src="logo.png" alt=""><span class="paper-title">Certificate for Transactions
+              of Organic Agricultural Products</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td colspan="4">1.File Number：<span>{FileNumber}</span></td>
+          <td colspan="4">5.Date of issue：<span>{IssueDate}</span></td>
+        </tr>
+        <tr>
+          <td colspan="4">2.Imported Country<p>{DestCountry}</p>
+          </td>
+          <td colspan="2">6.Export Country<p>{ExportCountry}</p>
+          </td>
+          <td colspan="2">7.Certificate Number<p>{CertificationNumber}</p>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4">3.The name of Importer & Address<p>{ImporterName}</p>
+            <p>{ImporterName}</p>
+          </td>
+          <td colspan="4">8.The Name of Certification Body & Address<p>{CompanyName}</p>
+            <p>{CompanyAddress}</p>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4">4.The Name of Exporter & Address<p>{ExporterName}</p>
+            <p>{ExporterAddress}</p>
+          </td>
+          <td colspan="4">9.The Name of Certified Operator & Address<p>{FarmName}</p>
+            <p>{FarmAddress}</p>
+          </td>
+        </tr>
+        <tr>
+          <td style="width: 8%;">Item No.</td>
+          <td colspan="2" style="width: 20%;">10.Name of the Product</td>
+          <td style="width: 20%;">11.Lot Number</td>
+          <td>12.Unit Weight / package specification</td>
+          <td style="width: 10%;">13.Quantity</td>
+          <td>14.Total Net Weight</td>
+          <td>15.Remark</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td colspan="2">Name of the Product</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td>2</td>
+          <td colspan="2">Name of the Product</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td colspan="8">Standard：Organic Agriculture Promotion Act, Certification Standard for Organic Agricultural
+            Products and In-conversion Agricultural Products and Allowable Substances in their Production, Processing,
+            Packaging, Distribution, and Sale, and other regulations.</td>
+        </tr>
+        <tr>
+          <td colspan="8">Remark：<p>{SystemNote}</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="signer-name">
+      16.Name signature of authorized person：{SignerName}
+    </div>
+    <div class="note">
+      <p>聲明：本文件除非經有機農業促進法取得認證之有機農產品驗證機構簽署，否則無效。</p>
+      <p>上開驗證機構可於網站 https://epv.afa.gov.tw 查閱。</p>
+    </div>
+    <div>
+      <p>本驗證文件與續頁分開使用無效 {DCGUID}</p>
+    </div>
+  </div> -->
+
+  <!-- canada -->
+  <!-- 加拿大-英文 -->
+  <div class="paper ca-en">
+    <h2 class="note">File Number：{FileNumber}</h2>
+    <div class="s-word">稿</div>
+    <table class="paper-table" border="1">
+      <thead>
+        <tr>
+          <th colspan="8"><img class="img" src="logo.png" alt=""><span class="paper-title">Certificate for Transactions
+              of Organic Products </span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td colspan="4">1.File Number：<span>{FileNumber}</span></td>
+          <td colspan="4">5.Date of issue：<span>{IssueDate}</span></td>
+        </tr>
+        <tr>
+          <td colspan="4">2.Imported Country<p>{DestCountry}</p>
+          </td>
+          <td colspan="2">6.Export Country<p>{ExportCountry}</p>
+          </td>
+          <td colspan="2">7.Certificate Number<p>{CertificationNumber}</p>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4">3.Name of Importer & Address<p>{ImporterName}</p>
+            <p>{ImporterName}</p>
+          </td>
+          <td colspan="4">8.Name of Certification Body & Address<p>{CompanyName}</p>
+            <p>{CompanyAddress}</p>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4">4.Name of Exporter & Address<p>{ExporterName}</p>
+            <p>{ExporterAddress}</p>
+          </td>
+          <td colspan="4">9.Name of Certified Operator & Address<p>{FarmName}</p>
+            <p>{FarmAddress}</p>
+          </td>
+        </tr>
+        <tr>
+          <td style="width: 8%;">Item No.</td>
+          <td colspan="2" style="width: 20%;">10.Name of the Product</td>
+          <td style="width: 20%;">11.Lot Number</td>
+          <td>12.Unit Weight / package specification</td>
+          <td style="width: 10%;">13.Quantity</td>
+          <td>14.Total Net Weight</td>
+          <td>15.Additional Remarks (if any)</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td colspan="2">Name of the Product</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td>2</td>
+          <td colspan="2">Name of the Product</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td colspan="8">Standard：Organic Agriculture Promotion Act and its accompanying regulations.</td>
+        </tr>
+        <tr>
+          <td colspan="8">Declaration：<p>{SystemNote}</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="signer-name">
+      16.Name and signature of authorized person:{SignerName}
+    </div>
+    <div class="note">
+      <p>聲明：本文件除非經有機農業促進法取得認證之有機農產品驗證機構簽署，否則無效。</p>
+      <p>上開驗證機構可於網站 https://epv.afa.gov.tw 查閱。</p>
+    </div>
+    <div>
+      <p>本驗證文件與續頁分開使用無效 {DCGUID}</p>
+    </div>
+  </div>
+  <!-- built files will be auto injected -->
 </body>
+
 </html>

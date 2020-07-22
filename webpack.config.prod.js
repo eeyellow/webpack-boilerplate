@@ -41,7 +41,7 @@ const getEntry = (targetPath) => {
 
 module.exports = (env = {}) => ({
   context: entryDir,
-  mode: 'development',
+  mode: 'production',
   entry: getEntry(entryDir),
   output: {
     path: outDir,
@@ -104,30 +104,30 @@ module.exports = (env = {}) => ({
     new WebpackBar(),
     new VueLoaderPlugin(),
   ],
-  // optimization: {
-  //   runtimeChunk: 'single',
-  //   splitChunks: {
-  //     cacheGroups: {
-  //       vendor: {
-  //         test: /[\\/]node_modules[\\/]/,
-  //         name: 'vendors',
-  //         chunks: 'all'
-  //       }
-  //     }
-  //   }
-  // },
-  devtool: 'source-map',
-  devServer: {
-    contentBase: entryDir,
-    publicPath: process.env.BASE_URL,
-    index: './index.html',
-    hot: true,
-    stats: 'minimal',
-    quiet: true,
-    overlay: {
-      warnings: true,
-      errors: true
-    },
-    historyApiFallback: true,
-  }
+  optimization: {
+    runtimeChunk: 'single',
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all'
+        }
+      }
+    }
+  },
+  // devtool: 'source-map',
+  // devServer: {
+  //   contentBase: entryDir,
+  //   publicPath: process.env.BASE_URL,
+  //   index: './index.html',
+  //   hot: true,
+  //   stats: 'minimal',
+  //   quiet: true,
+  //   overlay: {
+  //     warnings: true,
+  //     errors: true
+  //   },
+  //   historyApiFallback: true,
+  // }
 });
